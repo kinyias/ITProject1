@@ -15,14 +15,19 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ThaiTinKhang_Main.cpp">
+    <ClCompile Include="DoAnTinHoc_Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ThaiTinKhang.h">
+    <ClCompile Include="DoAnTinHoc.h">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="ThaiTinKhang_Setting.cpp">
+    <ClCompile Include="DoAnTinHoc_Setting.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="danhsachmathang.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

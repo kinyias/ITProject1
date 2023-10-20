@@ -1,4 +1,4 @@
-#include "ThaiTinKhang.h"
+#include "DoAnTinHoc.h"
 
 int main() {
 	int key;
@@ -13,7 +13,7 @@ int main() {
         cout << "**  4. Them 1 mat hang vao cuoi danh sach.           **\n";
         cout << "**  5. Xuat ra thong tin mat hang la boi cua 7.      **\n";
         cout << "**  6. Tim mat hang co so luong lon nhat.            **\n";
-        cout << "**  7. Hien thi danh sach sinh vien.                 **\n";
+        cout << "**  7. Kiem tra mat hang ton kho.                    **\n";
         cout << "**  8. Tim va xoa nhung mat hang het hsd.            **\n";
         cout << "**  9. Thong ke nhung mat hang con hsd.              **\n";
         cout << "**  10. Xuat danh sach mat hang ra file text         **\n";
@@ -38,7 +38,11 @@ int main() {
             break;
         case 3:
             if (dsmh != NULL) {
-                xoa_MatHang(dsmh);
+                char ten[20];
+                cin.ignore();
+                cout << "Nhap ten mat hang can xoa: ";
+                cin.getline(ten, 20);
+                xoa_MatHang(dsmh, ten);
             }
             else {
                 cout << "\nDanh sach mat hang trong!";
@@ -51,7 +55,7 @@ int main() {
             break;
         case 5:
             if (dsmh != NULL) {
-
+                xuat_MatHangBoi7(dsmh);
             }
             else {
                 cout << "\nDanh sach mat hang trong!";
@@ -68,9 +72,25 @@ int main() {
             pressAnyKey();
             break;
         case 7:
+            if (dsmh != NULL) {
+                char tenMatHang[20];
+                cin.ignore();
+                cout << "Nhap ten mat hang can kiem tra: ";
+                cin.getline(tenMatHang, 20);
+                kiemtra_TinhTrangMatHang(dsmh,tenMatHang);
+            }
+            else {
+                cout << "\nDanh sach mat hang trong!";
+            }
             pressAnyKey();
             break;
         case 8:
+            if (dsmh != NULL) {
+                thongKeHetHanSuDung(dsmh);
+            }
+            else {
+                cout << "\nDanh sach mat hang trong!";
+            }
             pressAnyKey();
             break;
         case 9:
@@ -83,11 +103,8 @@ int main() {
             pressAnyKey();
             break;
         case 10:
-            pressAnyKey();
-            break;
-        case 11:
             if (dsmh != NULL) {
-                xuat_DanhSachMatHang(dsmh);
+                xuat_ThongTinRaFile(dsmh, "danhsachmathang.txt");
             }
             else {
                 cout << "\nDanh sach mat hang trong!";
@@ -96,6 +113,7 @@ int main() {
             break;
         case 0:
             cout << "\nBan da chon thoat khoi chuong trinh";
+            giaiPhong(dsmh);
             return 0;
         default:
             cout << "\nKhong co chuc nang nay!";
@@ -104,5 +122,6 @@ int main() {
             break;
         }
 	}
+    giaiPhong(dsmh);
 	return 0;
 }

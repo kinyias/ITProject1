@@ -1,4 +1,4 @@
-﻿#include "ThaiTinKhang.h"
+﻿#include "DoAnTinHoc.h"
 void khoiTao(Nodeptr& list) {
 	list = NULL;
 }
@@ -41,53 +41,38 @@ void nhap_DanhSachMatHang(Nodeptr& list) {
 	MatHang mh;
 	int n; // n mặt hàng cần nhập
 	khoiTao(list);
-	cout << "\n So luong mat hang can nhap: ";
+	cout << "\nSo luong mat hang can nhap: ";
 	cin >> n;
 	cin.ignore();
 	for (int i = 1; i <= n; i++) {
-		cout << "\n Nhap thong tin mat hang thu " << i<<": ";
-		cout << "\n Ten mat hang: ";
+		cout << "\nNhap thong tin mat hang thu " << i<<": ";
+		cout << "\nTen mat hang: ";
 		cin.getline(mh.ten, 20);
 		while (kiemTra_TrungTen(list, mh.ten)) {
-			cout << "\n Ten mat hang bi trung";
-			cout << "\n Nhap lai ten mat hang: ";
+			cout << "Ten mat hang bi trung";
+			cout << "\nNhap lai ten mat hang: ";
 			cin.getline(mh.ten, 20);
 		}
-		cout << "\n Nhap gia: ";
+		cout << "Nhap gia: ";
 		cin >> mh.gia;
-		cout << "\n Nhap so luong con lai: ";
+		cout << "Nhap so luong con lai: ";
 		cin >> mh.soLuong;
-		cout << "\n Nhap han su dung: ";
+		cout << "Nhap han su dung: ";
 		cin >> mh.hanSuDung;
 		cin.ignore();
 		them_MatHang(list, mh);
 	}
-	/*do {
-		cout << "\n Nhap ten mat hang (Nhap -99 de thoat): ";
-		cin.getline(mh.ten, 20);
-		while (kiemTra_TrungTen(list, mh.ten)) {
-			cout << "\n Ten mat hang bi trung";
-			cout << "\n Nhap lai ten mat hang: ";
-			cin.getline(mh.ten, 10);
-		}
-		if (strcmp(mh.ten,"-99") == 0) break;
-		cout << "\n Nhap gia: ";
-		cin >> mh.gia;
-		cout << "\n Nhap so luong con lai: ";
-		cin >> mh.soLuong;
-		cout << "\n Nhap han su dung: ";
-		cin >> mh.hanSuDung;
-		cin.ignore();
-		them_MatHang(list, mh);
-	} while (1);*/
 }
 
 void xuat_DanhSachMatHang(Nodeptr list){
-	cout << setw(0) << "Ten" << setw(15) << "Gia" << setw(25) << "SL" << setw(30)<< "HSD" << endl;
+	cout << "--------------------------------------------------------------" << endl;
+	cout << left << setw(20) << "Ten" << setw(20) << "Gia" << setw(10) << "SL" << setw(20) << "HSD"<<setw(25)<< endl;
+	cout << "--------------------------------------------------------------" << endl;
 	while (list != NULL) {
-		cout << setw(0) << list->data.ten << setw(15) << list->data.gia << setw(25) << list->data.soLuong << setw(30) << list->data.hanSuDung <<endl;
+		cout << left << setw(20) << list->data.ten << setw(20) << list->data.gia << setw(10) << list->data.soLuong << setw(20) << list->data.hanSuDung << endl;
 		list = list->link;
 	}
+	cout << "--------------------------------------------------------------" << endl;
 }
 //2. Sắp xếp danh sách các mặt hàng theo giá mặt hàng tăng dần, nếu cùng giá thì sắp xếp theo tên mặt
 //hàng và xuất ra màn hình
@@ -106,16 +91,12 @@ void sapXep_DSTangDan(Nodeptr& list) {
 }
 
 //3. Xóa 1 mặt hàng khỏi danh sách
-void xoa_MatHang(Nodeptr& list) {
-	char ten[20];
-	cin.ignore();
-	cout << "Nhap ten can xoa: ";
-	cin.getline(ten, 20);
+void xoa_MatHang(Nodeptr& list, char* ten) {
 	if(strcmp(list->data.ten, ten) ==0){
 		Nodeptr p = list;
 		list = list->link;
 		delete p;
-		cout << "Xoa thanh cong";
+		cout << "Xoa thanh cong\n";
 	}
 	else {
 		Nodeptr p, before;
@@ -128,10 +109,10 @@ void xoa_MatHang(Nodeptr& list) {
 		if (p != NULL) {
 			before->link = p->link;
 			delete p;
-			cout << "Xoa thanh cong";
+			cout << "Xoa thanh cong\n";
 		}
 		else {
-			cout << "Khong tim thay mat hang de xoa";
+			cout << "Khong tim thay mat hang de xoa\n";
 		}
 	}
 
@@ -141,18 +122,18 @@ void xoa_MatHang(Nodeptr& list) {
 Nodeptr them_MatHangCuoi(Nodeptr& list) {
 	MatHang mh;
 	cin.ignore();
-	cout << "\n Ten mat hang: ";
+	cout << "\nTen mat hang: ";
 	cin.getline(mh.ten, 20);
 	while (kiemTra_TrungTen(list, mh.ten)) {
-		cout << "\n Ten mat hang bi trung";
-		cout << "\n Nhap lai ten mat hang: ";
+		cout << "Ten mat hang bi trung";
+		cout << "\nNhap lai ten mat hang: ";
 		cin.getline(mh.ten, 20);
 	}
-	cout << "\n Nhap gia: ";
+	cout << "Nhap gia: ";
 	cin >> mh.gia;
-	cout << "\n Nhap so luong con lai: ";
+	cout << "Nhap so luong con lai: ";
 	cin >> mh.soLuong;
-	cout << "\n Nhap han su dung: ";
+	cout << "Nhap han su dung: ";
 	cin >> mh.hanSuDung;
 	cin.ignore();
 
@@ -169,7 +150,16 @@ Nodeptr them_MatHangCuoi(Nodeptr& list) {
 	return p;
 }
 //5. Xuất ra màn hình thông tin mặt hàng là bội của 7
-// Note: Giá hay số lượng mặt hàng là bội của 7?
+void xuat_MatHangBoi7(Nodeptr list) {
+	Nodeptr p = list;
+	while (p != NULL) {
+		if (p->data.gia % 7 == 0) {
+			cout << "Ten: " << p->data.ten << ", Gia: " << p->data.gia
+				<< ", So luong: " << p->data.soLuong << ", Han su dung: " << p->data.hanSuDung << endl;
+		}
+		p = p->link;
+	}
+}
 //6. Tìm mặt hàng có số lượng lớn nhất
 //Hàm này để tìm mặt hàng có số lượng tồn kho lớn nhất 
 Nodeptr timMatHangCoSoLuongLonNhat(Nodeptr list) {
@@ -188,13 +178,32 @@ Nodeptr timMatHangCoSoLuongLonNhat(Nodeptr list) {
 // Xuất thông mặt hàng có số lượng tồn kho lớn nhất
 void xuat_ThongTinMotMatHangCoSoLuongLonNhat(Nodeptr list) {
 	Nodeptr maxMatHang = timMatHangCoSoLuongLonNhat(list);
-	cout << setw(0) << "Ten" << setw(15) << "Gia" << setw(25) << "SL" << setw(30) << "HSD" << endl;
-	cout << setw(0) << maxMatHang->data.ten << setw(15) << maxMatHang->data.gia << setw(25) << maxMatHang->data.soLuong << setw(30) << maxMatHang->data.hanSuDung << endl;
+	cout << "--------------------------------------------------------------" << endl;
+	cout << left << setw(20) << "Ten" << setw(20) << "Gia" << setw(10) << "SL" << setw(20) << "HSD" << setw(25) << endl;
+	cout << "--------------------------------------------------------------" << endl;
+	cout << left << setw(20) << maxMatHang->data.ten << setw(20) << maxMatHang->data.gia << setw(10) << maxMatHang->data.soLuong << setw(20) << maxMatHang->data.hanSuDung << endl;
+	cout << "--------------------------------------------------------------" << endl;
 }
 //7. Nhập vào một mặt hàng và kiểm tra trong kho xem mặt hàng này còn hay hết.
+void kiemtra_TinhTrangMatHang(Nodeptr list, const char* ten) {
+	Nodeptr p = list;
+	while (p != NULL) {
+		if (strcmp(p->data.ten, ten) == 0) {
+			if (p->data.soLuong > 0) {
+				cout << "Con hang" << endl;
+			}
+			else {
+				cout << "Da het hang" << endl;
+			}
+			return;
+		}
+		p = p->link;
+	}
+	cout << "Khong tim thay mat hang ten " << ten << endl;
+}
 //8. Tìm trong danh sách những mặt hàng hết hạn sử dụng.Nếu có thì xóa mặt hàng này khỏi danh
 //sách.
-// // Hàm để kiểm tra xem mặt hàng còn hạn sử dụng hay không
+// Hàm để kiểm tra xem mặt hàng còn hạn sử dụng hay không
 bool conHanSuDung(Nodeptr matHang) {
 	// Lấy ngày hiện tại
 	time_t t = time(0);
@@ -217,7 +226,6 @@ void thongKeHetHanSuDung(Nodeptr list) {
 	bool coMatHangHetHanSuDung = false;
 
 	cout << "Danh sach mat hang con han su dung:" << endl;
-
 	while (p != NULL) {
 		if (!conHanSuDung(p)) {
 			cout << "Ten: " << p->data.ten << ", Gia: " << p->data.gia
@@ -229,6 +237,31 @@ void thongKeHetHanSuDung(Nodeptr list) {
 
 	if (!coMatHangHetHanSuDung) {
 		cout << "Khong co mat hang het han su dung." << endl;
+	}
+	else {
+		xoa_MatHangHetHan(list);
+	}
+}
+void xoa_MatHangHetHan(Nodeptr &list) {
+	Nodeptr p = list;
+	Nodeptr previous = NULL;
+	while (p != NULL) {
+		if (!conHanSuDung(p)) {
+			Nodeptr toDelete = p;
+			if (previous != NULL) {
+				previous->link = p->link;
+			}
+			else {
+				list = p->link;
+			}
+
+			p = p->link;
+			delete toDelete;
+		}
+		else {
+			previous = p;
+			p = p->link;
+		}
 	}
 }
 //9. Thống kê những mặt hàng còn hạn sử dụng trong danh sách.
@@ -253,14 +286,26 @@ void thongKeHanSuDung(Nodeptr list) {
 	}
 }
 //10. Xuất thông tin các mặt hàng trong danh sách vào file text
+void xuat_ThongTinRaFile(Nodeptr list, const char* tenFile) {
+	ofstream outFile(tenFile);
 
-
-void printLine(int n) {
-	cout << endl;
-	for (int i = 0; i < n; i++) {
-		cout << "_";
+	if (!outFile.is_open()) {
+		cout << "Khong mo duoc file " << tenFile << endl;
+		return;
 	}
-	cout << endl;
+
+	Nodeptr p = list;
+
+	outFile << "--------------------------------------------------------------" << endl;
+	outFile << left << setw(20) << "Ten" << setw(20) << "Gia" << setw(10) << "SL" << setw(20) << "HSD" << setw(25) << endl;
+	outFile << "--------------------------------------------------------------" << endl;
+	while (p != NULL) {
+		outFile << left << setw(20) << p->data.ten << setw(20) << p->data.gia << setw(10) << p->data.soLuong << setw(20) << p->data.hanSuDung << endl;
+		p = p->link;
+	}
+	outFile << "--------------------------------------------------------------" << endl;
+	outFile.close();
+	cout << "Xuat file thanh cong." << endl;
 }
 
 void pressAnyKey() {

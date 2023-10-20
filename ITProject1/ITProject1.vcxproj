@@ -127,9 +127,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ThaiTinKhang.h" />
-    <ClCompile Include="ThaiTinKhang_Main.cpp" />
-    <ClCompile Include="ThaiTinKhang_Setting.cpp" />
+    <ClCompile Include="DoAnTinHoc.h" />
+    <ClCompile Include="DoAnTinHoc_Main.cpp" />
+    <ClCompile Include="DoAnTinHoc_Setting.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="danhsachmathang.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
