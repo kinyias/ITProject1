@@ -213,7 +213,23 @@ bool conHanSuDung(Nodeptr matHang) {
 }
 // Hàm để thống kê những mặt hàng hết hạn sử dụng
 void thongKeHetHanSuDung(Nodeptr list) {
+	Nodeptr p = list;
+	bool coMatHangHetHanSuDung = false;
 
+	cout << "Danh sach mat hang con han su dung:" << endl;
+
+	while (p != NULL) {
+		if (!conHanSuDung(p)) {
+			cout << "Ten: " << p->data.ten << ", Gia: " << p->data.gia
+				<< ", So luong: " << p->data.soLuong << ", Han su dung: " << p->data.hanSuDung << endl;
+			coMatHangHetHanSuDung = true;
+		}
+		p = p->link;
+	}
+
+	if (!coMatHangHetHanSuDung) {
+		cout << "Khong co mat hang het han su dung." << endl;
+	}
 }
 //9. Thống kê những mặt hàng còn hạn sử dụng trong danh sách.
 // Hàm để thống kê những mặt hàng còn hạn sử dụng
