@@ -1,10 +1,10 @@
-#include "ThaiTinKhang.h"
+﻿#include "ThaiTinKhang.h"
 
 int main() {
-	int key;
-	Nodeptr dsmh;
+    int key;
+    Nodeptr dsmh;
     khoiTao(dsmh);
-	while (true) {
+    while (true) {
         cout << "CHUONG TRINH DANH SACH HANG HOA C/C++\n";
         cout << "*************************MENU**************************\n";
         cout << "**  1. Them n mat hang.                              **\n";
@@ -13,23 +13,27 @@ int main() {
         cout << "**  4. Them 1 mat hang vao cuoi danh sach.           **\n";
         cout << "**  5. Xuat ra thong tin mat hang la boi cua 7.      **\n";
         cout << "**  6. Tim mat hang co so luong lon nhat.            **\n";
-        cout << "**  7. Hien thi danh sach sinh vien.                 **\n";
+        cout << "**  7. Kiem tra mat hang ton kho.                    **\n";
         cout << "**  8. Tim va xoa nhung mat hang het hsd.            **\n";
         cout << "**  9. Thong ke nhung mat hang con hsd.              **\n";
         cout << "**  10. Xuat danh sach mat hang ra file text         **\n";
         cout << "**  0. Thoat                                         **\n";
         cout << "*******************************************************\n";
-        cout << "Nhap tuy chon: ";
-        cin >> key;
-        switch(key){
+        cout << "Chon chuc nang: ";
+        if (cin >> key) {
+        }
+        else {
+            cout << "Oops có lỗi! Bạn phải nhập kí tự số. Mời bạn khởi động lại chương trình" << endl;
+        }
+        switch (key) {
         case 1:
             nhap_DanhSachMatHang(dsmh);
             xuat_DanhSachMatHang(dsmh);
             pressAnyKey();
             break;
         case 2:
-            if (dsmh !=NULL) {
-            sapXep_DSTangDan(dsmh);
+            if (dsmh != NULL) {
+                sapXep_DSTangDan(dsmh);
             }
             else {
                 cout << "\nDanh sach mat hang trong!";
@@ -38,7 +42,11 @@ int main() {
             break;
         case 3:
             if (dsmh != NULL) {
-                xoa_MatHang(dsmh);
+                char ten[20];
+                cin.ignore();
+                cout << "Nhap ten mat hang can xoa: ";
+                cin.getline(ten, 20);
+                xoa_MatHang(dsmh, ten);
             }
             else {
                 cout << "\nDanh sach mat hang trong!";
@@ -51,7 +59,7 @@ int main() {
             break;
         case 5:
             if (dsmh != NULL) {
-
+                xuat_MatHangBoi7(dsmh);
             }
             else {
                 cout << "\nDanh sach mat hang trong!";
@@ -68,9 +76,25 @@ int main() {
             pressAnyKey();
             break;
         case 7:
+            if (dsmh != NULL) {
+                char tenMatHang[20];
+                cin.ignore();
+                cout << "Nhap ten mat hang can kiem tra: ";
+                cin.getline(tenMatHang, 20);
+                kiemtra_TinhTrangMatHang(dsmh, tenMatHang);
+            }
+            else {
+                cout << "\nDanh sach mat hang trong!";
+            }
             pressAnyKey();
             break;
         case 8:
+            if (dsmh != NULL) {
+                thongKeHetHanSuDung(dsmh);
+            }
+            else {
+                cout << "\nDanh sach mat hang trong!";
+            }
             pressAnyKey();
             break;
         case 9:
@@ -83,6 +107,12 @@ int main() {
             pressAnyKey();
             break;
         case 10:
+            if (dsmh != NULL) {
+                xuat_ThongTinRaFile(dsmh, "danhsachmathang.txt");
+            }
+            else {
+                cout << "\nDanh sach mat hang trong!";
+            }
             pressAnyKey();
             break;
         case 11:
@@ -96,6 +126,7 @@ int main() {
             break;
         case 0:
             cout << "\nBan da chon thoat khoi chuong trinh";
+            giaiPhong(dsmh);
             return 0;
         default:
             cout << "\nKhong co chuc nang nay!";
@@ -103,6 +134,7 @@ int main() {
             pressAnyKey();
             break;
         }
-	}
-	return 0;
+    }
+    giaiPhong(dsmh);
+    return 0;
 }
